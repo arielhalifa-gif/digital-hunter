@@ -38,7 +38,7 @@ class Mysql:
 
 
 
-     @staticmethod
+    @staticmethod
     def insert_into_damage(data: dict):
         cnx = Mysql.get_mysql_connection()
         add_new_damage = ("INSERT INTO attack (timestamp, attack_id, entity_id, result)"
