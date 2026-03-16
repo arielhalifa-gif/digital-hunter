@@ -22,9 +22,32 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
 
       KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
-
     volumes:
-      - kafka_kraft:/var/lib/kafka/data
+    - kafka_kraft:/var/lib/kafka/data
+
+
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch-wolfi:9.3.1
+    container_name: elastic
+    ports:
+      - "9200:9200"
+
+    environment:
+      ELASTIC_PASSWORD: password
+
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: targets-bank
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+
+
+
 
 volumes:
   kafka_kraft:
+  mysql-data:
