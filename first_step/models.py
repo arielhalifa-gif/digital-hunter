@@ -14,9 +14,15 @@ class Intel(BaseModel):
 
 
 class Attack(BaseModel):
-    pass
+    timestamp: datetime
+    attack_id: str
+    entity_id: str
+    weapon_type: str
 
 
 
 class Damage(BaseModel):
-    pass
+    timestamp: datetime
+    attack_id: str
+    entity_id: str
+    result: str
