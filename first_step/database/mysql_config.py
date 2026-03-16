@@ -23,6 +23,32 @@ class Mysql:
         cursor.close()
         cnx.close()
 
+    
+
+    @staticmethod
+    def insert_into_attack(data: dict):
+        cnx = Mysql.get_mysql_connection()
+        add_new_attack = ("INSERT INTO attack (timestamp, attack_id, entity_id, weapon_type)"
+                        "VALUES(%s, %s, %s, %s)")
+        values = tuple(data.values())
+        cursor = cnx.cursor()
+        cursor.execute(add_new_attack, values)
+        cursor.close()
+        cnx.close()
+
+
+
+    @staticmethod
+    def insert_into_damage(data: dict):
+        cnx = Mysql.get_mysql_connection()
+        add_new_damage = ("INSERT INTO attack (timestamp, attack_id, entity_id, result)"
+                        "VALUES(%s, %s, %s, %s)")
+        values = tuple(data.values())
+        cursor = cnx.cursor()
+        cursor.execute(add_new_damage, values)
+        cursor.close()
+        cnx.close()
+
 
     @staticmethod
     def search_target_in_sql(entity_id_target):

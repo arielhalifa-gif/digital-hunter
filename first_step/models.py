@@ -40,6 +40,15 @@ class Attack(BaseModel):
     entity_id: str
     weapon_type: str
 
+    def validate_attack(target):
+        try:
+            attack = Attack(timestamp=target['timestamp'],
+                            attack_id=target['attack_id'],
+                            entity_id=target['entity_id'],
+                            weapon_type=target['weapons_type'])
+            return True
+        except ValidationError as err:
+            return False
 
 
 class Damage(BaseModel):
@@ -47,3 +56,14 @@ class Damage(BaseModel):
     attack_id: str
     entity_id: str
     result: str
+
+
+    def validate_damage(target):
+        try:
+            damage = Damage(timestamp=target['timestamp'],
+                            attack_id=target['attack_id'],
+                            entity_id=target['entity_id'],
+                            result=target['result'])
+            return True
+        except ValidationError as err:
+            return False

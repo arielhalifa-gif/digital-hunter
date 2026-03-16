@@ -19,7 +19,14 @@ def run_main_operations():
                                        target['reported_lat'],
                                        target['reported_lon'])
                Mysql.update_distance(distance, target['entity_id'])
-            
+    for target in Consumer.listen_attack():
+        response = Attack.validate_attack(target)
+        if response:
+            Mysql.insert_into_attack(target)
+    for target in Consumer.listen_damage():
+        response = Damage.validate_damage(target)
+        if response:
+            Mysql.insert_into_damage(target)
                
 
 
