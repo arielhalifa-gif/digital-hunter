@@ -18,7 +18,8 @@ def run_main_operations():
                                        result[4],
                                        target['reported_lat'],
                                        target['reported_lon'])
-               
+               Mysql.update_distance(distance, target['entity_id'])
+            
                
 
 

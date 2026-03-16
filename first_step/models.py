@@ -4,6 +4,7 @@ from kafka.kafka_producer import Producer
 
 
 
+
 class Intel(BaseModel):
     timestamp: datetime
     signal_id: str
@@ -12,6 +13,7 @@ class Intel(BaseModel):
     reported_lon: float
     signal_type: str
     priority_level: int = Field(ge=1, le=5 | 99, default=None)
+    distance: float = None
 
 
     def validate_intel(target: dict):
@@ -22,7 +24,8 @@ class Intel(BaseModel):
                         reported_lat=target['reprted_lat'],
                         reported_lon=target['reported_lon'],
                         signal_type=target['signal_type'],
-                        priority_level=target['priority_level'])
+                        priority_level=target['priority_level'],
+                        distance=target['distance'])
             return True
         except ValidationError as err:
             print(err)

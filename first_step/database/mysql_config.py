@@ -35,3 +35,16 @@ class Mysql:
         cursor.close()
         cnx.close()
         return result
+    
+
+    @staticmethod
+    def update_distance(distance_km, entity_id_target):
+        query = '''UPDATE TABLE intel
+                    SET distance = %s
+                    WHERE entity_id = %s'''
+        cnx = Mysql.get_mysql_connection()
+        cursor = cnx.cursor()
+        cursor.execute(query, distance_km, entity_id_target)
+        cursor.close()
+        cnx.close()
+        return
