@@ -3,6 +3,7 @@ from confluent_kafka import Producer
 
 
 class Producer:
+    @staticmethod
     def send_to_topic(data, reason):
         producer_config = {
             "bootstrap.servers": "localhost:9092"

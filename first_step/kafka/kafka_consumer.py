@@ -15,6 +15,7 @@ consumer = Consumer(consumer_config)
 
 
 class Consumer:
+    @staticmethod
     def listen_intel():
         consumer.subscribe(["Intel"])
         try:
@@ -36,11 +37,11 @@ class Consumer:
 
 
 
-
+    @staticmethod
     def listen_attack():
         consumer.subscribe(["Attack"])
 
-
+    @staticmethod
     def listen_damage():
         consumer.subscribe(["Damage"])
         
