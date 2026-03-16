@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ValidationError
 from datetime import datetime
+from kafka.kafka_producer import Producer
 
 
 
@@ -10,7 +11,24 @@ class Intel(BaseModel):
     reported_lat: float
     reported_lon: float
     signal_type: str
-    priority_level: int = Field(ge=1, le=5 | 99)
+    priority_level: int = Field(ge=1, le=5 | 99, default=None)
+
+
+    def validate_intel(target: dict):
+        try:
+            intel = Intel(timestamp=target['timestamp'],
+                        signal_id=target['signal_id'],
+                        entity_id=target['entity_id'],
+                        reported_lat=target['reprted_lat'],
+                        reported_lon=target['reported_lon'],
+                        signal_type=target['signal_type'],
+                        priority_level=target['priority_level'])
+            return True
+        except ValidationError as err:
+            print(err)
+            Producer.send_to_topic(intel, err)
+            return False
+
 
 
 class Attack(BaseModel):

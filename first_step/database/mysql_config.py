@@ -22,3 +22,16 @@ class Mysql:
         cursor.execute(add_new_target, values)
         cursor.close()
         cnx.close()
+
+
+    @staticmethod
+    def search_target_in_sql(entity_id_target):
+        query  = '''SELECT * FROM intel
+                    WHERE entity_id LIKE %s'''
+        cnx = Mysql.get_mysql_connection()
+        cursor = cnx.cursor()
+        cursor.execute(query, entity_id_target)
+        result = cursor.fetchall()
+        cursor.close()
+        cnx.close()
+        return result
